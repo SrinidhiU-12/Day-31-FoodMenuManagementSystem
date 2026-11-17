@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Database Configuration
@@ -57,6 +58,16 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularClient", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // HTTP Request Pipeline
@@ -66,6 +77,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AngularClient");
 
 app.UseAuthentication();
 app.UseAuthorization();
