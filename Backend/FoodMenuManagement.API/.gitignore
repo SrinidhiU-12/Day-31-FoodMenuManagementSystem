@@ -1,0 +1,20 @@
+# .NET
+**/bin/
+**/obj/
+**/Properties/launchSettings.json
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.tmp
+*.Backup.tmp
+
+# Angular
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Environment and secrets
+**/appsettings.Development.json
+**/secrets.json
