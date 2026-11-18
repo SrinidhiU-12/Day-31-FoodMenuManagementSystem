@@ -73,7 +73,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
-
+// Order Dependency Injection
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 var app = builder.Build();
 
 // HTTP Request Pipeline

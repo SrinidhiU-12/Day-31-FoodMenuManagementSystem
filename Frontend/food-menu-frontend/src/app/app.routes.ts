@@ -7,6 +7,8 @@ import { CategoryList } from './components/category-list/category-list';
 import { CategoryForm } from './components/category-form/category-form';
 import { FoodItemList } from './components/food-item-list/food-item-list';
 import { FoodItemForm } from './components/food-item-form/food-item-form';
+import { OrderList } from './components/order-list/order-list';
+
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -20,5 +22,5 @@ export const routes: Routes = [
 { path: 'food-items', component: FoodItemList },
 { path: 'food-items/add', component: FoodItemForm },
 { path: 'food-items/edit/:id', component: FoodItemForm },
-
+{ path: 'orders', component: OrderList}
 ];

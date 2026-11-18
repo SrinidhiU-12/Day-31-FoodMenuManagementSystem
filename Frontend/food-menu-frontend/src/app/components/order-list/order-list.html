@@ -1,0 +1,95 @@
+
+<div class="container">
+
+  <div class="header">
+    <h2>My Orders</h2>
+<!-- <div style="background: #fff3cd; padding: 15px; margin: 15px 0;">
+  <p>Loading: {{ isLoading }}</p>
+  <p>Orders count: {{ orders.length }}</p>
+  <pre>{{ orders | json }}</pre>
+</div> -->
+    <button class="create-btn" (click)="createOrder()">
+      + Create New Order
+    </button>
+  </div>
+
+  @if (successMessage) {
+    <p class="success">{{ successMessage }}</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (isLoading) {
+    <p>Loading orders...</p>
+  }
+
+  @if (!isLoading && orders.length === 0) {
+    <div class="empty">
+      <h3>No orders found</h3>
+      <p>Create your first order to get started.</p>
+    </div>
+  }
+
+  @if (!isLoading && orders.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Order Date</th>
+          <th>Status</th>
+          <th>Total Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (order of orders; track order.id) {
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.orderDate | date:'medium' }}</td>
+            <td>
+              <span class="status">{{ order.status }}</span>
+            </td>
+            <td>₹{{ order.totalAmount }}</td>
+
+            <td class="actions">
+              <button
+                class="view-btn"
+                (click)="viewOrder(order.id)">
+                View
+              </button>
+
+              @if (order.status !== 'Delivered' &&
+                   order.status !== 'Cancelled') {
+                <button
+                  class="cancel-btn"
+                  (click)="cancelOrder(order.id)">
+                  Cancel
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (selectedOrder) {
+    <div class="details">
+      <h3>Order Details</h3>
+
+      <p><strong>Order ID:</strong> {{ selectedOrder.id }}</p>
+      <p><strong>Customer ID:</strong> {{ selectedOrder.customerId }}</p>
+      <p><strong>Order Date:</strong> {{ selectedOrder.orderDate | date:'medium' }}</p>
+      <p><strong>Status:</strong> {{ selectedOrder.status }}</p>
+      <p><strong>Total Amount:</strong> ₹{{ selectedOrder.totalAmount }}</p>
+
+      <button class="close-btn" (click)="closeDetails()">
+        Close
+      </button>
+    </div>
+  }
+
+</div>

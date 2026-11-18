@@ -1,0 +1,29 @@
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn {
+  background: #2563eb;
+}
+
+.details {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.details h3 {
+  margin-top: 0;
+}
+
+.close-btn {
+  background: #64748b;
+}
+
+.status {
+  font-weight: 600;
+}
