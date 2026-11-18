@@ -1,0 +1,55 @@
+
+<div class="container">
+  <div class="header">
+    <h2>Food Item Management</h2>
+    <a routerLink="/food-items/add" class="add-btn">
+      + Add Food Item
+    </a>
+  </div>
+
+  @if (message) {
+    <p class="message">{{ message }}</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Food Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Availability</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of foodItems; track item.id) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td>₹{{ item.price }}</td>
+          <td>{{ item.categoryName }}</td>
+          <td>{{ item.isAvailable ? 'Available' : 'Unavailable' }}</td>
+          <td>
+            <a [routerLink]="['/food-items/edit', item.id]">
+              Edit
+            </a>
+
+            @if (item.isAvailable) {
+              <button (click)="deactivate(item.id)">
+                Deactivate
+              </button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7">No food items found.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

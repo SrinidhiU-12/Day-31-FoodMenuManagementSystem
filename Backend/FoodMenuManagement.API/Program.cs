@@ -56,6 +56,10 @@ builder.Services.AddAuthorization();
 // Dependency Injection
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// FoodItem Dependency Injection
+builder.Services.AddScoped<IFoodItemRepository, FoodItemRepository>();
+builder.Services.AddScoped<IFoodItemService, FoodItemService>();
+
 // Controllers and OpenAPI
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();

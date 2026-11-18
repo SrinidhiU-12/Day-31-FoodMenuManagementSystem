@@ -5,6 +5,8 @@ import { Login } from './components/login/login';
 import { Register } from './components/register/register';
 import { CategoryList } from './components/category-list/category-list';
 import { CategoryForm } from './components/category-form/category-form';
+import { FoodItemList } from './components/food-item-list/food-item-list';
+import { FoodItemForm } from './components/food-item-form/food-item-form';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -13,5 +15,10 @@ export const routes: Routes = [
 
   { path: 'categories', component: CategoryList },
   { path: 'categories/add', component: CategoryForm },
-  { path: 'categories/edit/:id', component: CategoryForm }
+  { path: 'categories/edit/:id', component: CategoryForm },
+
+{ path: 'food-items', component: FoodItemList },
+{ path: 'food-items/add', component: FoodItemForm },
+{ path: 'food-items/edit/:id', component: FoodItemForm },
+
 ];
