@@ -9,6 +9,8 @@ import { FoodItemList } from './components/food-item-list/food-item-list';
 import { FoodItemForm } from './components/food-item-form/food-item-form';
 import { OrderList } from './components/order-list/order-list';
 import { OrderItemList } from './components/order-item-list/order-item-list';
+import { PaymentComponent } from './components/payment/payment';
+
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -27,5 +29,10 @@ export const routes: Routes = [
 {
   path: 'orders/:orderId/items',
   component: OrderItemList
-}
+}, 
+
+{
+  path: 'orders/:orderId/payment',
+  component: PaymentComponent
+},
 ];

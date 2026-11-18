@@ -1,0 +1,77 @@
+<div class="container">
+
+  <h2>Payment Management</h2>
+
+  <p><strong>Order ID:</strong> {{ orderId }}</p>
+
+  @if (successMessage) {
+    <p class="success">{{ successMessage }}</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (isLoading) {
+    <p>Loading payment details...</p>
+  }
+
+  @if (!isLoading && !payment) {
+    <div class="payment-form">
+
+      <h3>Select Payment Method</h3>
+
+      <label for="paymentMethod">Payment Method</label>
+
+      <select
+        id="paymentMethod"
+        [(ngModel)]="paymentMethod">
+
+        <option value="CashOnDelivery">
+          Cash on Delivery
+        </option>
+
+        <option value="Online">
+          Online (Demo)
+        </option>
+
+      </select>
+
+      <button
+        (click)="createPayment()"
+        [disabled]="isSubmitting">
+
+        {{ isSubmitting ? 'Processing...' : 'Create Payment' }}
+
+      </button>
+
+      <p class="note">
+        Online payment is currently a demo record.
+        No actual money is processed.
+      </p>
+
+    </div>
+  }
+
+  @if (payment) {
+    <div class="payment-details">
+
+      <h3>Payment Details</h3>
+
+      <p><strong>Payment ID:</strong> {{ payment.id }}</p>
+      <p><strong>Order ID:</strong> {{ payment.orderId }}</p>
+      <p><strong>Amount:</strong> ₹{{ payment.amount }}</p>
+      <p><strong>Payment Method:</strong> {{ payment.paymentMethod }}</p>
+      <p><strong>Payment Status:</strong> {{ payment.paymentStatus }}</p>
+
+      <p>
+        <strong>Created At:</strong>
+        {{ payment.createdAt | date:'medium' }}
+      </p>
+
+    </div>
+  }
+
+  <a routerLink="/orders">Back to Orders</a>
+
+</div>

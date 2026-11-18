@@ -17,5 +17,7 @@ namespace FoodMenuManagement.API.Models
 
         public ICollection<OrderItem> OrderItems { get; set; }
             = new List<OrderItem>();
+
+        public Payment? Payment { get; set; }
     }
 }

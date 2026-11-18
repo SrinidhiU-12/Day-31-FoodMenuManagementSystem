@@ -80,6 +80,9 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
 var app = builder.Build();
 
 // HTTP Request Pipeline

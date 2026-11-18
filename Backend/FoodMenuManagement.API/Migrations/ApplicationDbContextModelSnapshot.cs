@@ -228,6 +228,46 @@ namespace FoodMenuManagement.API.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("FoodMenuManagement.API.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -402,6 +442,17 @@ namespace FoodMenuManagement.API.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("FoodMenuManagement.API.Models.Payment", b =>
+                {
+                    b.HasOne("FoodMenuManagement.API.Models.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("FoodMenuManagement.API.Models.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -461,6 +512,8 @@ namespace FoodMenuManagement.API.Migrations
             modelBuilder.Entity("FoodMenuManagement.API.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618
         }
