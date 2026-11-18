@@ -1,0 +1,46 @@
+<div class="form-container">
+
+  <h2>{{ id ? 'Edit Category' : 'Add Category' }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+
+    <label>Category Name</label>
+
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="name"
+      required
+      maxlength="100"
+    >
+
+    <label>Description</label>
+
+    <textarea
+      name="description"
+      [(ngModel)]="description"
+      maxlength="500"
+    ></textarea>
+
+    @if (id !== null) {
+      <label>
+        <input
+          type="checkbox"
+          name="isActive"
+          [(ngModel)]="isActive"
+        >
+        Active
+      </label>
+    }
+
+    <button type="submit" [disabled]="categoryForm.invalid">
+      {{ id ? 'Update Category' : 'Create Category' }}
+    </button>
+
+    <a routerLink="/categories">Cancel</a>
+
+  </form>
+
+  <p class="message">{{ message }}</p>
+
+</div>

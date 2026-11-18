@@ -1,14 +1,14 @@
 
 using FoodMenuManagement.API.Data;
 using FoodMenuManagement.API.Models;
-using FoodMenuManagement.API.Services.Interfaces;
+using FoodMenuManagement.API.Repositories.Implementations;
+using FoodMenuManagement.API.Repositories.Interfaces;
 using FoodMenuManagement.API.Services.Implementations;
-
+using FoodMenuManagement.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-
 using System.Text;
 
 
@@ -47,7 +47,9 @@ builder.Services.AddAuthentication(options =>
                 builder.Configuration["Jwt:Key"]!))
     };
 });
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 // Authorization
 builder.Services.AddAuthorization();
 

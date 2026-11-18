@@ -11,5 +11,6 @@ namespace FoodMenuManagement.API.Data
             : base(options)
         {
         }
+        public DbSet<Category> Categories { get; set; }
     }
 }

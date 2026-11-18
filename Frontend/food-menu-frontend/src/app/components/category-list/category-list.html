@@ -1,0 +1,52 @@
+<div class="container">
+
+  <div class="header">
+    <h2>Category Management</h2>
+
+    <a routerLink="/categories/add" class="add-btn">
+      + Add Category
+    </a>
+  </div>
+
+  <p class="message">{{ message }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (category of categories; track category.id) {
+        <tr>
+          <td>{{ category.id }}</td>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td>{{ category.isActive ? 'Active' : 'Inactive' }}</td>
+
+          <td>
+            <a [routerLink]="['/categories/edit', category.id]">
+              Edit
+            </a>
+
+            @if (category.isActive) {
+              <button (click)="deactivate(category.id)">
+                Deactivate
+              </button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5">No categories found.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>
