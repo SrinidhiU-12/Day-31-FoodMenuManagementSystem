@@ -3,14 +3,16 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Order } from '../../models/order';
 import { OrderService } from '../../services/order';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './order-list.html',
   styleUrl: './order-list.css'
 })
+
 export class OrderList implements OnInit {
 
   orders: Order[] = [];

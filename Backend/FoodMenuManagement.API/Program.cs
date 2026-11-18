@@ -76,6 +76,10 @@ builder.Services.AddCors(options =>
 // Order Dependency Injection
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
 var app = builder.Build();
 
 // HTTP Request Pipeline

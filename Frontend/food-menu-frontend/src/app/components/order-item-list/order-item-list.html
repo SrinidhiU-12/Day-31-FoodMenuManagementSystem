@@ -1,0 +1,90 @@
+
+<div class="container">
+
+  <h2>Order #{{ orderId }} - Food Items</h2>
+
+  @if (successMessage) {
+    <p class="success">{{ successMessage }}</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <div class="add-form">
+    <h3>Add Food Item</h3>
+
+    <label>Select Food Item</label>
+
+    <select [(ngModel)]="selectedFoodItemId">
+      <option [ngValue]="0">Select a food item</option>
+
+      @for (food of foodItems; track food.id) {
+        <option [ngValue]="food.id">
+          {{ food.name }} - ₹{{ food.price }}
+        </option>
+      }
+    </select>
+
+    <label>Quantity</label>
+
+    <input
+      type="number"
+      min="1"
+      [(ngModel)]="quantity"
+    />
+
+    <button (click)="addItem()">Add Item</button>
+  </div>
+
+  @if (isLoading) {
+    <p>Loading order items...</p>
+  }
+
+  @if (!isLoading && items.length === 0) {
+    <p>No food items added to this order yet.</p>
+  }
+
+  @if (!isLoading && items.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Food Item</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (item of items; track item.id) {
+          <tr>
+            <td>{{ item.foodItemName }}</td>
+            <td>₹{{ item.unitPrice }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.subTotal }}</td>
+            <td>
+              <button (click)="updateQuantity(item)">
+                Update
+              </button>
+
+              <button
+                class="cancel-btn"
+                (click)="removeItem(item.id)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <div class="total">
+    <h3>Total Amount: ₹{{ totalAmount }}</h3>
+  </div>
+
+  <a routerLink="/orders">Back to Orders</a>
+
+</div>

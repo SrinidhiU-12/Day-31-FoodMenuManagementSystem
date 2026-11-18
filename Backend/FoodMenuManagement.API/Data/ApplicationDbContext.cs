@@ -21,6 +21,8 @@ namespace FoodMenuManagement.API.Data
         public DbSet<Order> Orders { get; set; } = null!;
 
         // Model Configuration
+
+        public DbSet<OrderItem> OrderItems { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -35,6 +37,26 @@ namespace FoodMenuManagement.API.Data
                 .HasOne(o => o.Customer)
                 .WithMany()
                 .HasForeignKey(o => o.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<OrderItem>()
+                .Property(oi => oi.UnitPrice)
+                .HasPrecision(10, 2);
+
+            builder.Entity<OrderItem>()
+                .Property(oi => oi.SubTotal)
+                .HasPrecision(10, 2);
+
+            builder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<OrderItem>()
+                .HasOne(oi => oi.FoodItem)
+                .WithMany(f => f.OrderItems)
+                .HasForeignKey(oi => oi.FoodItemId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

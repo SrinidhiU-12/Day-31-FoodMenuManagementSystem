@@ -53,23 +53,15 @@
               <span class="status">{{ order.status }}</span>
             </td>
             <td>₹{{ order.totalAmount }}</td>
+            <td>
+  <button (click)="viewOrder(order.id)">View</button>
 
-            <td class="actions">
-              <button
-                class="view-btn"
-                (click)="viewOrder(order.id)">
-                View
-              </button>
+  <button (click)="cancelOrder(order.id)">Cancel</button>
 
-              @if (order.status !== 'Delivered' &&
-                   order.status !== 'Cancelled') {
-                <button
-                  class="cancel-btn"
-                  (click)="cancelOrder(order.id)">
-                  Cancel
-                </button>
-              }
-            </td>
+  <button [routerLink]="['/orders', order.id, 'items']">
+    Manage Items
+  </button>
+        </td>
           </tr>
         }
       </tbody>
